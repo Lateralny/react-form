@@ -1,38 +1,77 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'PT Sans', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container {
   display: flex;
-  flex-direction: column;
+  height: 90vh;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: 1rem;
+}
+.container > form {
+  width: 45%;
+  border: 1px solid #dfdfdf;
+  padding: 20px;
+  border-radius: 5px;
+  background: #fff;
+  
+}
+hr.solid{
+  border-top: 1px solid gray;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.ui-form{
+}
+
+.field{
+
+}
+.container label {
+  margin: 15px 10px 5px 0;
+}
+.container input {
+  vertical-align: middle;
+  margin: 5px 10px 5px 15px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+.container button {
+  margin: 15px;
+  padding: 10px 20px;
+  background-color: dodgerblue;
+  border: 1px solid #ddd;
   color: white;
+  cursor: pointer;
+}
+.container button:hover {
+  background-color: royalblue;
 }
 
-.App-link {
-  color: #61dafb;
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+@media (max-width: 800px) {
+  .form-inline input {
+    margin: 10px 0;
   }
-  to {
-    transform: rotate(360deg);
+
+  .form-inline {
+    flex-direction: column;
+    align-items: stretch;
   }
 }
