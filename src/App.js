@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './App.css';
+const axios = require('axios').default;
 
 function App() {
 
@@ -13,30 +14,51 @@ function App() {
     const {name, value} = e.target;
     setFormValues({ ...formValues, [name]: value});
   };
+  
+  async function getCharge(){
 
+    try{
+      const response = await axios.get(`http://localhost:3001/create-charge?tokenAmount=${formValues.tokenAmount}&walletAddress=${formValues.walletAddress}`);
+      const data = await response.data
+      window.location.href = data.hosted_url
+    } catch (error) {
+    console.error(error);
+      }
+    
+
+  }
+  //TO DO handle error, encode URL?
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmit(true);
-
-    console.log(formValues.tokenAmount);
-    fetch('http://localhost:3001/create-charge', {
+    getCharge();
+/*
+    axios.get(`http://localhost:3001/create-charge?tokenAmount=${formValues.tokenAmount}&walletAddress=${formValues.walletAddress}`)
+    .then(response.json())
+    */
+    //console.log(formValues.tokenAmount);
+    /*
+    fetch('http://localhost:3001/api', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formValues),
     })
-      //.then(res)
-
+      .then(res => {console.log(res)})
+      */
+      //.then(fetch('http://localhost:3001/create-charge'))
+      
   };
 
   useEffect(() => {
     if(Object.keys(formErrors).length === 0 && isSubmit) {
       console.log(formValues);
     }
-  },[formErrors]);
+  });
 
-
-//regex dla ETH wallet portfela, arbitrum ma takie same 
+//testowy portfel
+//0x7F2e915C432F222943bDa4A216D50d514EfC55f0
+//regex dla ETH wallet portfela, arbitrum ma taki sam kod portfela
   const validate = (values) => {
     const errors = {};
     const regex = /^0x[a-fA-F0-9]{40}$/g;
@@ -58,13 +80,6 @@ function App() {
 
   return (
     <div className='container'>
-      
-      {Object.keys(formErrors).length === 0 && isSubmit ? (
-        <div className='ui message success'>success</div>
-      ) : (
-        <pre>{JSON.stringify(formValues, undefined, 2)}</pre> 
-      )}
-
       
       <form onSubmit={handleSubmit}>
         <h1>
