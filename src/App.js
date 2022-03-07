@@ -21,7 +21,7 @@ function App() {
   async function getCharge(){
 
     try{
-      const response = await axios.get(`http://localhost:3001/create-charge?email=${formValues.email}&tokenAmount=${formValues.tokenAmount}&walletAddress=${formValues.walletAddress}`);
+      const response = await axios.get(`http://localhost:3001/api/create-charge?email=${formValues.email}&tokenAmount=${formValues.tokenAmount}&walletAddress=${formValues.walletAddress}`);
       const data = await response.data
       window.location.href = data.hosted_url
     } catch (error) {
